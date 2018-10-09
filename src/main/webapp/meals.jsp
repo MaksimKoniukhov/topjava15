@@ -27,18 +27,26 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
+<br>
+<a href="meals?action=create">Add meal</a>
+<br>
+<br>
 
 <table>
     <tr>
         <th>Date/Time</th>
         <th>Description</th>
         <th>Calories</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
-    <c:forEach items="${listMeal}" var="meal">
-        <tr class="${meal.exceed ? 'red' : 'green'}">
-            <td><javatime:format value="${meal.dateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-            <td>${meal.description}</td>
-            <td>${meal.calories}</td>
+    <c:forEach items="${listMeals}" var="mealWithExceed">
+        <tr class="${mealWithExceed.exceed ? 'red' : 'green'}">
+            <td><javatime:format value="${mealWithExceed.dateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+            <td>${mealWithExceed.description}</td>
+            <td>${mealWithExceed.calories}</td>
+            <td><a href="meals?action=update&id=${mealWithExceed.id}">Edit</a></td>
+            <td><a href="meals?action=delete&id=${mealWithExceed.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

@@ -33,7 +33,12 @@ public class MealRestController {
     public List<MealWithExceed> getAllFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         log.info("getAllFiltered");
         return MealsUtil.getFilteredWithExceeded(service
-                .getAll(SecurityUtil.authUserId(), startDate, endDate), SecurityUtil.authUserCaloriesPerDay(), startTime, endTime);
+                        .getAll(SecurityUtil.authUserId(),
+                                startDate == null ? LocalDate.MIN : startDate,
+                                endDate == null ? LocalDate.MAX : endDate),
+                SecurityUtil.authUserCaloriesPerDay(),
+                startTime == null ? LocalTime.MIN : startTime,
+                endTime == null ? LocalTime.MAX : endTime);
     }
 
     public Meal get(int id) {
